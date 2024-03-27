@@ -5,6 +5,7 @@
 
 <!--    <bean id="organ" class="com.abhijeetsingh.Heart" />-->
     <bean id="organObject" class="com.abhijeetsingh.Heart" />
-    <bean id="human" class="com.abhijeetsingh.Human" autowire="byType">
+<!--    <bean id="human" class="com.abhijeetsingh.Human" autowire="byType">-->
+    <bean id="human" class="com.abhijeetsingh.Human" autowire="constructor">
     </bean>
 </beans>

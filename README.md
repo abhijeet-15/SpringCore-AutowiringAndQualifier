@@ -70,3 +70,20 @@ The class of the bean should be same as the type/class of the dependency
     <bean id="organObject" class="com.abhijeetsingh.Heart" />
     <bean id="human" class="com.abhijeetsingh.Human" autowire="byType">
 ```
+
+**By constructor**
+
+A matching constructor should be present in the dependent class and it will be
+used for initialisation
+
+```xml
+    <bean id="organObject" class="com.abhijeetsingh.Heart" />
+<!--    <bean id="human" class="com.abhijeetsingh.Human" autowire="byType">-->
+    <bean id="human" class="com.abhijeetsingh.Human" autowire="constructor">
+```
+
+```java
+    public Human(Organ organ) {
+        this.organ = organ;
+    }
+```

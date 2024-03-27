@@ -6,6 +6,10 @@ public class Human {
 
     public Human(){};
 
+    public Human(Organ organ) {
+        this.organ = organ;
+    }
+
     public void setOrgan(Organ organ) {
         this.organ = organ;
     }
