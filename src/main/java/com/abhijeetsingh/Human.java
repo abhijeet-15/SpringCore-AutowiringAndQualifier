@@ -14,5 +14,4 @@ public class Human {
         organ.working();
     }
 
-
 }

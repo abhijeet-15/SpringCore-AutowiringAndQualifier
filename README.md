@@ -62,3 +62,11 @@ public class Heart implements Organ {
 <bean id="organ" class="com.abhijeetsingh.Heart" />
 <bean id="human" class="com.abhijeetsingh.Human" autowire="byName" />
 ```
+
+#### byType
+The class of the bean should be same as the type/class of the dependency
+
+```xml
+    <bean id="organObject" class="com.abhijeetsingh.Heart" />
+    <bean id="human" class="com.abhijeetsingh.Human" autowire="byType">
+```
