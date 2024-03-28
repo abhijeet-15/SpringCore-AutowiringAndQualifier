@@ -87,3 +87,76 @@ used for initialisation
         this.organ = organ;
     }
 ```
+
+## Using Java
+- By default, annotations are disabled. Update the ```beans.xml``` to include ** context xsd**
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config />
+    <bean id="organObject" class="com.abhijeetsingh.Heart" />
+    <bean id="jobObject" class="com.abhijeetsingh.Job" />
+    <bean id="human" class="com.abhijeetsingh.Human">
+    </bean>
+</beans>
+```
+
+- Autowiring using constructor: In the dependent class's constructor add the annotation **@AutoWired**
+```java
+    @Autowired
+    public Human(Organ organ, Job job) {
+        this.organ = organ;
+        this.job = job;
+    }
+```
+
+- Autowiring using Setter: In the dependent class's setter method add the annotation **@AutoWired**
+```java
+    @Autowired
+    public void setOrgan(Organ organ) {
+        this.organ = organ;
+    }
+
+    @Autowired
+    public void setJob(Job job) {
+        this.job = job;
+    }
+```
+
+For setter **@Autowired**, first it tries to resolve byType and then byName. For ex: If there are two beans of the heart configured,
+byType resolution will fail due to conflict. Then the byName (id of the bean and the variable name of the dependency) will be used.
+
+- Annotation **@Qualifier** can be used to explicitly specify which bean to use.
+
+```xml
+    <bean id="organObjectOne" class="com.abhijeetsingh.Heart" />
+    <bean id="organObjectTwo" class="com.abhijeetsingh.Heart" />
+    <bean id="jobObject" class="com.abhijeetsingh.Job" />
+    <bean id="human" class="com.abhijeetsingh.Human">
+```
+
+```java
+    @Autowired
+    @Qualifier("organObjectOne")
+    public void setOrgan(Organ organ) {
+        this.organ = organ;
+    }
+```
+- **@AutoWired** and **@Qualifier** annotations can also be added to the variables directly. Interestingly, it does not require us
+add a setter method. The id of the bean is matched directly with the variable type and then name. 
+- 
+```java
+
+    @Autowired
+    @Qualifier("organObjectOne")
+    private Organ organ;
+
+    @Autowired
+    @Qualifier("jobObject")
+    private Job job;
+```
